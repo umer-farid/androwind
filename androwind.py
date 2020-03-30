@@ -3,7 +3,7 @@
 """
 Created on Wed Mar  4 10:14:55 2020
 
-@author: root
+@author: Umer Farid
 """
 import os, sys
 import netifaces as ni
@@ -39,7 +39,10 @@ def logo():
 
                    }--{+} Coded By Umer Farid {+}--{
                       }----{+} Androwind {+}----{
-                   }--{+} Dark Minded Coders  {+}--{ \033[0m
+                   }--{+} Dark Minded Coders  {+}--{ 
+              }--{+} Email: umerfarid53@gmail.com  {+}--{ 
+                   
+                   \033[0m
     '''.center(os.get_terminal_size().columns)
     print(f"{logo}")
 
