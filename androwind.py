@@ -59,6 +59,7 @@ def __directory__():
         os.system("mkdir /tmp/payload/")
         print("\n" + blue_plus + " Directory has been created \n")
         print("")
+
 def __apache__():
     animation = ("\/-\\")
     for i in range(10):
@@ -74,6 +75,7 @@ def __default__(ip, port):
     print("\n" + blue_plus + " set IP = > ", ip)
     print(blue_plus + " set Port = > ", port)
     return ip, port
+
 #Android payload
 def venom_andro(ip, port, filename):
     try:
@@ -121,6 +123,7 @@ def ngrok():
     os.system("cp ngrok /usr/local/bin")
     print("\n" + blue_plus + " Ngrok installed \n")
     print("")
+
 def ngConfig():
     path = "/root/.ngrok2"
     animation = ("\/-\\")
