@@ -1,0 +1,11 @@
+authtoken: 1Zqqv0FMKSGYQ7tRMv64Y2jEGIZ_3roo5zYJEMc4p38zykwZM
+tunnels:
+    first-app:
+        tunnel:
+        addr: "80"
+        proto: http
+    second-app:
+        tunnel:
+        addr: "1234"
+        proto: tcp
+
