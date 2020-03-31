@@ -21,7 +21,7 @@ if [ "$PREFIX" = "/data/data/com.termux/files/usr" ]; then
     pkg install -y git python2
 elif [ "$(uname)" = "Darwin" ]; then
     INSTALL_DIR="/usr/local/androwind"
-    BIN_DIR="/usr/local/bin/"
+    BIN_DIR="/usr/local/bin"
     BASH_PATH="/bin/bash"
     TERMUX=false
 else
@@ -40,10 +40,10 @@ if [ -d "$INSTALL_DIR" ]; then
     if [ "$mama" = "y" ]; then
         if [ "$TERMUX" = true ]; then
             rm -rf "$INSTALL_DIR"
-            rm "$BIN_DIR/androwind*"
+            rm -rf "$BIN_DIR/androwind"
         else
             sudo rm -rf "$INSTALL_DIR"
-            sudo rm "$BIN_DIR/androwind*"
+            sudo rm -rf " $BIN_DIR/androwind*"
         fi
     else
         echo "[✘] If you want to install you must remove previous installations [✘] ";
