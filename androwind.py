@@ -42,9 +42,9 @@ def logo():
 
                    }--{+} Coded By Umer Farid {+}--{
                       }----{+} Androwind {+}----{
-                   }--{+} Dark Minded Coders  {+}--{ 
-              }--{+} Email: umerfarid53@gmail.com  {+}--{ 
-                   
+                   }--{+} Dark Minded Coders  {+}--{
+              }--{+} Email: umerfarid53@gmail.com  {+}--{
+
                    \033[0m
     '''.center(os.get_terminal_size().columns)
     print(f"{logo}")
