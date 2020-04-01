@@ -7,7 +7,7 @@ Work over LAN and WAN with the help of ngrok
 
 if any error occurred click here to contact us: 
 <br> <a href="mailto:umerfarid53@gmail.com">Send mail</a>
-<br><a href="www.facebook.com/cybernetics.me">Follow us on Facebook</a>
+<br><a href="https://www.facebook.com/cybernetics.me">Follow us on Facebook</a>
 
 # Prerequisites
 Follow listed commands
