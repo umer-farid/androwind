@@ -5,8 +5,8 @@ Create a backdoor for windows and android devices.
 
 Work over LAN and WAN with the help of ngrok
 
-if any error occurred click here to contact us: <br> <a href="mailto:umerfarid53@gmail.com">Send mail</a>
-
+if any error occurred click here to contact us: 
+<br> <a href="mailto:umerfarid53@gmail.com">Send mail</a>
 <a href="www.facebook.com/cybernetics.me">Follow us on Facebook</a>
 
 # Prerequisites
