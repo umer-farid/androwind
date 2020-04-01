@@ -27,5 +27,26 @@ chmod +x install.sh
 
 ./install.sh
 
+# Ngrok Port Forwarding
+
+<h4> Very important and main step here! </h4>
+
+You must have to create an account on ngrok to use this tool, the link is given below.
+
+Signup: <a href="https://dashboard.ngrok.com/signup" target = "_blank">Ngrok Signup</a>
+
+Once you signup, login to the account and get the token which will used to port forward server and listener at the same time.
+
+Login: <a href="https://dashboard.ngrok.com/login">Ngrok Login</a>
+
+Just copy the authtoken and make small changes in ngrok.yml file before getting started with it.
+
+nano androwind/ngrok.yml
+
+Replace your authtoken there and now you're ready to go. 
+
 # Run Androwind
+
+Run the tool by typing a command over the terminal.
+
 androwind
