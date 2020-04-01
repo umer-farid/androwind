@@ -32,7 +32,7 @@ You must have to create an account on ngrok to use this tool, the link is given 
 
 Signup: <a href="https://dashboard.ngrok.com/signup" target = "_blank">Ngrok Signup</a>
 
-Once you signup, login to the account and get the token which will used to port forward server and listener at the same time.
+Once you signup, login to the account and get the token which will used to port forward for server and listener at the same time.
 
 Login: <a href="https://dashboard.ngrok.com/login">Ngrok Login</a>
 
