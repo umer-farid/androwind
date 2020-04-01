@@ -10,8 +10,6 @@ echo "
                                                Emai: umerfarid53@gmail.com
 
 "
-#sudo chmod +x uninstall
-
 
 if [ "$PREFIX" = "/data/data/com.termux/files/usr" ]; then
     INSTALL_DIR="$PREFIX/usr/share/doc/androwind"
