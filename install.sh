@@ -12,16 +12,18 @@ echo "
 "
 #sudo chmod +x uninstall
 
+
 if [ "$PREFIX" = "/data/data/com.termux/files/usr" ]; then
     INSTALL_DIR="$PREFIX/usr/share/doc/androwind"
     BIN_DIR="$PREFIX/bin/"
     BASH_PATH="$PREFIX/bin/bash"
     TERMUX=true
 
-    pkg install -y git python2
+    pkg install -y git python3
+    pkg install python3-pip
 elif [ "$(uname)" = "Darwin" ]; then
     INSTALL_DIR="/usr/local/androwind"
-    BIN_DIR="/usr/local/bin/"
+    BIN_DIR="/usr/local/bin"
     BASH_PATH="/bin/bash"
     TERMUX=false
 else
@@ -30,20 +32,20 @@ else
     BASH_PATH="/bin/bash"
     TERMUX=false
 
-    sudo apt-get install -y git python3
+    sudo apt update; sudo apt-get install -y git python3; sudo apt install python3-pip
 fi
 
 echo "[✔] Checking directories...";
 if [ -d "$INSTALL_DIR" ]; then
     echo "[◉] A directory androwind was found! Do you want to replace it? [Y/n]:" ;
-    read mama
+    read -r mama
     if [ "$mama" = "y" ]; then
         if [ "$TERMUX" = true ]; then
             rm -rf "$INSTALL_DIR"
-            rm "$BIN_DIR/androwind*"
+            rm -rf "$BIN_DIR/androwind*"
         else
             sudo rm -rf "$INSTALL_DIR"
-            sudo rm "$BIN_DIR/androwind*"
+            sudo rm -rf "$BIN_DIR/androwind*"
         fi
     else
         echo "[✘] If you want to install you must remove previous installations [✘] ";
@@ -65,7 +67,7 @@ echo "[✔] Installing ...";
 echo "";
 git clone --depth=1 https://github.com/MrRobot-hub/androwind "$INSTALL_DIR";
 echo "#!$BASH_PATH
-python $INSTALL_DIR/androwind.py" '${1+"$@"}' > "$INSTALL_DIR/androwind";
+python $INSTALL_DIR/androwind.py" "${1+"$@"}" > "$INSTALL_DIR/androwind";
 chmod +x "$INSTALL_DIR/androwind";
 if [ "$TERMUX" = true ]; then
     cp "$INSTALL_DIR/androwind" "$BIN_DIR"
