@@ -1,9 +1,15 @@
 # Androwind
-A powerfull backdoor generator in python.
+A powerfull auto backdoor generator in python.
 
 Create a backdoor for windows and android devices.
 
 Work over LAN and WAN with the help of ngrok
+
+if any error occurred click here to contact us: <br> <a href="mailto:umerfarid53@gmail.com">mailto@Umer_Farid</a>
+
+<br> <a href="www.facebook.com/cybernetics.me">Facebook</a>
+
+Follow us on Facebook for valuable content: <a href="www.facebook.com/cybernetics.me">Facebook</a>
 
 # Prerequisites
 Follow listed commands
