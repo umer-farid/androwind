@@ -10,12 +10,9 @@ if any error occurred click here to contact us:
 <br><a href="https://www.facebook.com/cybernetics.me" target="_blank">Follow us on Facebook</a>
 
 # Prerequisites
+Windows + metasploit with updated python3 installed.
 
-<h4> apt updated </h4>
-
-<h4> Python3 updated </h4>
-
-<h4> pip3 updated </h4>
+Linux + metasploit with updated python3 installed
 
 # Download and Install Androwind
 
