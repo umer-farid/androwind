@@ -1,7 +1,7 @@
 # Androwind
 Click this thumbnail to watch the video about Androwind Installation and proper use!
 
-[<img align = "center" src="https://img.youtube.com/vi/NZotZben31M/maxresdefault.jpg" width="80%">](https://youtu.be/NZotZben31M)
+              [<img src="https://img.youtube.com/vi/NZotZben31M/maxresdefault.jpg" width="80%">](https://youtu.be/NZotZben31M)
 
 A powerfull auto backdoor generator in python.
 
