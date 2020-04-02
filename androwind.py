@@ -132,7 +132,7 @@ def metaConfig(ip, port):
 # CTRl + S to save file and CTRL + X to go further
 def systemHandler():
     try:
-        os.system("xterm -T Metasploit -e nano /root/.androwin/systemHandler.r")
+        os.system("xterm -T Metasploit -e nano /root/.androwind/systemHandler.r")
 
     except Exception as ex:
         print("Exception: %s " %str(ex))
