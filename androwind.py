@@ -177,7 +177,7 @@ def main():
     ngConfig()
 
     #input from user
-    choice = input(GREEN + "\033[91mSet default IP for LAN OR press n for set custom IP and PORT for WAN \033[0m\n" + red_ex + " Set default IP and Port no [Y/n]: ")
+    choice = input(GREEN + "\033[91mSet default IP for LAN OR press n for set custom IP and PORT for WAN \033[0m\n" + red_ex + " Set Local IP and Port no by androwind[Y/n]: ")
     if choice[0].upper() == 'Y':
 
         try:
