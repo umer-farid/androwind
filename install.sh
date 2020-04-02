@@ -12,7 +12,7 @@ echo -e "\e[91m
 
 \e[97m"
 
-echo -e "[\e[32m1\e[97m]. Install \n[\e[32m2\e[97m]. Uninstall \n[\e[32m3\e[97m]. Exit";
+echo -e "[\e[32m1\e[97m]. Install Androwind \n[\e[32m2\e[97m]. Uninstall Androwind \n[\e[32m3\e[97m]. Update Androwind \n[\e[32m4\e[97m]. Exit";
 read -r mama
 if [ "$mama" == '1' ]; then
 
@@ -97,9 +97,11 @@ if [ "$mama" == '1' ]; then
     fi
 elif [ "$mama" == '2' ]; then
     #statements
-    chmod +x uninstall.sh
+    sudo chmod +x uninstall.sh
     sudo ./uninstall.sh
-
+elif [ "$mama" == '3' ]; then
+    sudo chmod +x update.sh
+    sudo ./update.sh
 else
     echo "Good Bye!"
 fi
