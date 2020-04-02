@@ -44,19 +44,21 @@ if [ -d "$INSTALL_DIR" ]; then
 
     sudo rm -rf /root/.ngrok2/
 
-    echo -e "[\e[32m✔\e[97m] Uninstalled Successfully!"
-
-    echo -e "[\e[5m\e[91m✘\e[97m\e[25m] Installation not found!";
+    echo "[\e[32m✔\e[97m] Uninstalled Successfully!"
 
 else
 
-    echo -e "[\e[32m✔\e[97m] Cleaning up old directories...\n";
+    echo -e "[\e[5m\e[91m✘\e[97m\e[25m] Installation not found!";
+fi
 
-    if [ -d "$ETC_DIR/MrRobot-hub" ]; then
 
-        echo "$DIR_FOUND_TEXT"
+echo -e "[\e[32m✔\e[97m] Cleaning up old directories...\n";
 
-    elif [ "$TERMUX" = true ]; then
+if [ -d "$ETC_DIR/MrRobot-hub" ]; then
+
+    echo "$DIR_FOUND_TEXT"
+
+    if [ "$TERMUX" = true ]; then
 
         rm -rf "$ETC_DIR/MrRobot-hub"
 
