@@ -77,6 +77,6 @@ if [ -d "$ETC_DIR/MrRobot-hub" ]; then
 
     fi
 else
-     echo -e "[\e[32m✔\e[97m] Uninstalled Successfully! \n"
+     echo -e "[\e[32m✔\e[97m] Good Bye \e[91m$USER\e[97m\n"
 fi
 
