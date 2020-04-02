@@ -61,7 +61,7 @@ else
 fi
 
 
-echo -e "[\e[32m✔\e[97m] Cleaning up old directories...\n";
+echo -e "[\e[32m✔\e[97m] Cleaning up old directories...";
 
 if [ -d "$ETC_DIR/MrRobot-hub" ]; then
 
@@ -77,6 +77,6 @@ if [ -d "$ETC_DIR/MrRobot-hub" ]; then
 
     fi
 else
-     echo -e "[\e[32m✔\e[97m] Uninstalled Successfully!"
+     echo -e "[\e[32m✔\e[97m] Uninstalled Successfully! \n"
 fi
 
