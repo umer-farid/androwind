@@ -179,16 +179,18 @@ def main():
     #input from user
     choice = input(GREEN + "\033[91mSet default IP for LAN OR press n for set custom IP and PORT for WAN \033[0m\n" + red_ex + " Set Local IP and Port no by androwind[Y/n]: ")
     if choice[0].upper() == 'Y':
-
         try:
-            ip =   ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
+            if ni.ifaddresses('wlan0'):
+                ip = ni.ifaddresses('wlan0')[ni.AF_INET][0]['addr']
+            else:
+                ip = ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
+
             port = 4444
             __default__(ip,port)
             filename = input("\n" + red_ex + " Enter filename without extension: ")
             print(blue_plus + " set Filename = > ", filename)
-
         except Exception as ex:
-            print("Exception: %s " %str(ex))
+            print("Exception: %s" %str(ex))
     else:
 
         try:
