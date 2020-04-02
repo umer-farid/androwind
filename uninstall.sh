@@ -1,14 +1,17 @@
 #!/bin/bash
 clear
-echo "
+echo -e "\e[91m
 ██╗   ██╗███╗   ██╗██╗███╗   ██╗███████╗████████╗ █████╗ ██╗     ██╗     ███████╗██████╗
 ██║   ██║████╗  ██║██║████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║     ██║     ██╔════╝██╔══██╗
 ██║   ██║██╔██╗ ██║██║██╔██╗ ██║███████╗   ██║   ███████║██║     ██║     █████╗  ██████╔╝
 ██║   ██║██║╚██╗██║██║██║╚██╗██║╚════██║   ██║   ██╔══██║██║     ██║     ██╔══╝  ██╔══██╗
 ╚██████╔╝██║ ╚████║██║██║ ╚████║███████║   ██║   ██║  ██║███████╗███████╗███████╗██║  ██║
  ╚═════╝ ╚═╝  ╚═══╝╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝
+                                                             \e[97m\e[92mEmail: umerfarid53@gmail.com
+                                                             Facebook: facebook.com/cybernetics.me
 
-";
+
+\e[97m";
 
 if [ "$PREFIX" = "/data/data/com.termux/files/usr" ]; then
     INSTALL_DIR="$PREFIX/usr/share/doc/androwind"
@@ -31,7 +34,7 @@ else
 
 fi
 
-echo "[✔] Checking directories...";
+echo -e "[\e[32m✔\e[97m] Checking directories...";
 
 if [ -d "$INSTALL_DIR" ]; then
 
@@ -41,17 +44,15 @@ if [ -d "$INSTALL_DIR" ]; then
 
     sudo rm -rf /root/.ngrok2/
 
-    echo "[✔] Uninstalled Successfully!"
+    echo "[\e[32m✔\e[97m] Uninstalled Successfully!"
 
     else
 
-        echo "[✘] Installation not found! ";
-
-        echo "[✘] Failed! ";
+        echo -e "[\e[5m\e[91m✘\e[97m\e[25m] Installation not found!";
 fi
 
 
-#echo "[✔] Cleaning up old directories...";
+echo -e "[\e[32m✔\e[97m] Cleaning up old directories...\n";
 
 if [ -d "$ETC_DIR/MrRobot-hub" ]; then
 
