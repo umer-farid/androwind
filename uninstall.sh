@@ -40,13 +40,20 @@ if [ -d "$INSTALL_DIR" ]; then
 
     sudo rm -rf "$INSTALL_DIR"
 
+     echo -e "[\e[32m✔\e[97m] Androwind removed from: $INSTALL_DIR"
+
     sudo rm "$BIN_DIR/androwind"
+
+     echo -e "[\e[32m✔\e[97m] Androwind removed from: $BIN_DIR!"
 
     sudo rm -rf /root/.ngrok2/
 
+     echo -e "[\e[32m✔\e[97m] Ngrok configurations removed!"
+
     sudo rm -rf /usr/local/bin/ngrok
 
-    echo "[\e[32m✔\e[97m] Uninstalled Successfully!"
+    echo -e "[\e[32m✔\e[97m] Ngrok removed!"
+
 
 else
 
@@ -69,6 +76,7 @@ if [ -d "$ETC_DIR/MrRobot-hub" ]; then
         sudo rm -rf "$ETC_DIR/MrRobot-hub"
 
     fi
-
+else
+     echo -e "[\e[32m✔\e[97m] Uninstalled Successfully!"
 fi
 
