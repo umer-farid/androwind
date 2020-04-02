@@ -44,7 +44,7 @@ if [ -d "$INSTALL_DIR" ]; then
 
     sudo rm -rf /root/.ngrok2/
 
-    echo "[\e[32m✔\e[97m] Uninstalled Successfully!"
+    echo -e "[\e[32m✔\e[97m] Uninstalled Successfully!"
 
     else
 
