@@ -3,7 +3,7 @@ Click this thumbnail to watch the video about Androwind Installation and proper 
 
    [<img src="https://img.youtube.com/vi/NZotZben31M/maxresdefault.jpg" width="80%">](https://youtu.be/NZotZben31M)
 
-A powerfull auto backdoor generator in python coded by Umer Farid.
+A powerfull auto backdoor generator in python coded by <a href="https://www.facebook.com/cybernetics.me" target="_blank">Umer Farid</a>.
 
 Create a backdoor for windows and android devices.
 
