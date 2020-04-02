@@ -1,5 +1,5 @@
 clear
-echo "
+echo -e "\e[91m
 
  █████╗ ███╗   ██╗██████╗ ██████╗  ██████╗ ██╗    ██╗██╗███╗   ██╗██████╗
 ██╔══██╗████╗  ██║██╔══██╗██╔══██╗██╔═══██╗██║    ██║██║████╗  ██║██╔══██╗
@@ -7,9 +7,10 @@ echo "
 ██╔══██║██║╚██╗██║██║  ██║██╔══██╗██║   ██║██║███╗██║██║██║╚██╗██║██║  ██║
 ██║  ██║██║ ╚████║██████╔╝██║  ██║╚██████╔╝╚███╔███╔╝██║██║ ╚████║██████╔╝
 ╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═════╝
-                                               Email: umerfarid53@gmail.com
+                                     \e[97m\e[92m         Email: umerfarid53@gmail.com
+                                              Facebook: facebook.com/cybernetics.me
 
-"
+\e[97m"
 
 if [ "$PREFIX" = "/data/data/com.termux/files/usr" ]; then
     INSTALL_DIR="$PREFIX/usr/share/doc/androwind"
@@ -33,9 +34,9 @@ else
     sudo apt update; sudo apt-get install -y git python3; sudo apt install python3-pip
 fi
 
-echo "[✔] Checking directories...";
+echo -e "\n[\e[32m✔\e[97m] Checking directories...";
 if [ -d "$INSTALL_DIR" ]; then
-    echo "[◉] A directory androwind was found! Do you want to replace it? [Y/n]:" ;
+    echo -e "\n[\e[5m\e[32m◉\e[97m\e[25m] A directory androwind was found! Do you want to replace it? [Y/n]:" ;
     read -r mama
     if [ "$mama" = "y" ]; then
         if [ "$TERMUX" = true ]; then
@@ -46,12 +47,12 @@ if [ -d "$INSTALL_DIR" ]; then
             sudo rm -rf "$BIN_DIR/androwind*"
         fi
     else
-        echo "[✘] If you want to install you must remove previous installations [✘] ";
-        echo "[✘] Installation failed! [✘] ";
+        echo -e "\n[\e[91m✘\e[97m] If you want to install you must remove previous installations [✘] ";
+        echo -e "[\e[91m✘\e[97m] Installation failed! [✘] \n";
         exit
     fi
 fi
-echo "[✔] Cleaning up old directories...";
+echo -e "[\e[32m✔\e[97m] Cleaning up old directories...";
 if [ -d "$ETC_DIR/MrRobot-hub" ]; then
     echo "$DIR_FOUND_TEXT"
     if [ "$TERMUX" = true ]; then
@@ -61,7 +62,7 @@ if [ -d "$ETC_DIR/MrRobot-hub" ]; then
     fi
 fi
 
-echo "[✔] Installing ...";
+echo -e "[\e[5m\e[32m✔\e[97m\e[25m] Installing ...";
 echo "";
 git clone --depth=1 https://github.com/MrRobot-hub/androwind "$INSTALL_DIR";
 echo "#!$BASH_PATH
@@ -80,13 +81,13 @@ rm "$INSTALL_DIR/androwind";
 if [ -d "$INSTALL_DIR" ] ;
 then
     echo "";
-    echo "[✔] Tool installed successfully! [✔]";
+    echo -e "\n[\e[32m✔\e[97m] Tool installed successfully!";
     echo "";
     echo "[✔]====================================================================[✔]";
-    echo "[✔]      All is done!! You can execute tool by typing androwind !       [✔]";
+    echo -e "[\e[32m✔\e[97m]      All is done!! You can execute tool by typing androwind !       [✔]";
     echo "[✔]====================================================================[✔]";
     echo "";
 else
-    echo "[✘] Installation failed! [✘] ";
+    echo -e "\n[\e[5m\e[91m✘\e[97m\e[25m] Installation failed! [✘] ";
     exit
 fi
