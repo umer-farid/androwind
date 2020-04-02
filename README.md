@@ -47,3 +47,8 @@ Replace your authtoken there and now you're ready to go.
 Run the tool by typing a command over the terminal.
 
 androwind
+# Uninstall Androwind
+
+chmod +x uninstall.sh
+
+./uninstall.sh
