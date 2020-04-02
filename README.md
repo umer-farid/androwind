@@ -39,7 +39,7 @@ Login: <a href="https://dashboard.ngrok.com/login">Ngrok Login</a>
 Just copy the authtoken and make small changes in ngrok.yml file before getting started with it.
 Edit file ngrok.yml with your favourite editor. Here i use gedit (apt install gedit):
 
-gedit ngrok.yml
+gedit /root/.androwind/ngrok.yml
 
 Replace your authtoken there and now you're ready to go. 
 
