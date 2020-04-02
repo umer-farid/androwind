@@ -159,7 +159,7 @@ def ngConfig():
     if not os.path.exists(path):
 
         try:
-            os.system(f"mkdir /root/.ngrok2 && cp -f ngrok.yml /root/.ngrok2/")
+            os.system(f"sudo mkdir /root/.ngrok2 && sudo cp -f ngrok.yml /root/.ngrok2/ && sudo rm -r /root/.androwind/ngrok.yml && cp -f ngrok.yml /root/.androwind")
 
         except Exception as ex:
             print("Exception: %s " %str(ex))
