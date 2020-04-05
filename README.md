@@ -1,5 +1,5 @@
 # Androwind
-last Updated: Sun 05 Apr 2020 10:59:56 AM PKT
+last Updated: Sun 05 Apr 2020 09:54:16 PM PKT
 
 Click this thumbnail to watch the video about Androwind Installation and proper use!
 
@@ -21,6 +21,7 @@ Windows + metasploit with updated python3 installed.
 Linux + metasploit with updated python3 installed
 
 # Download and Install Androwind
+Copy and paste listed commands
 
 git clone https://github.com/MrRobot-hub/androwind.git
 
@@ -28,7 +29,7 @@ cd androwind
 
 chmod +x install.sh
 
-./install.sh
+sudo bash install.sh
 
 # Ngrok Port Forwarding
 
