@@ -17,4 +17,4 @@ echo -e "\e[91m
 echo -e "[\e[5m\e[32m✔\e[97m\e[25m] Updating ...";
 git clone --depth=1 https://github.com/MrRobot-hub/androwind.git
 sudo chmod +x androwind/install.sh
-bash androwind/install.sh
+sudo bash androwind/install.sh
