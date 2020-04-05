@@ -1,5 +1,5 @@
 # Androwind
-<h4>last Updated</h4>: Sun 05 Apr 2020 10:59:56 AM PKT
+last Updated: Sun 05 Apr 2020 10:59:56 AM PKT
 
 Click this thumbnail to watch the video about Androwind Installation and proper use!
 
