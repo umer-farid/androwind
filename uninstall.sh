@@ -69,7 +69,7 @@ if [ -d "$ETC_DIR/MrRobot-hub" ]; then
 
     if [ "$TERMUX" = true ]; then
 
-        rm -rf "$ETC_DIR/MrRobot-hub"
+        sudo rm -rf "$ETC_DIR/MrRobot-hub"
 
     else
 

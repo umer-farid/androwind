@@ -44,8 +44,8 @@ if [ "$mama" == '1' ]; then
         read -r mama
         if [ "$mama" = "y" ]; then
             if [ "$TERMUX" = true ]; then
-                rm -rf "$INSTALL_DIR"
-                rm -rf "$BIN_DIR/androwind*"
+                sudo rm -rf "$INSTALL_DIR"
+                sudo rm -rf "$BIN_DIR/androwind*"
             else
                 sudo rm -rf "$INSTALL_DIR"
                 sudo rm -rf "$BIN_DIR/androwind*"
@@ -60,7 +60,7 @@ if [ "$mama" == '1' ]; then
     if [ -d "$ETC_DIR/MrRobot-hub" ]; then
         echo "$DIR_FOUND_TEXT"
         if [ "$TERMUX" = true ]; then
-            rm -rf "$ETC_DIR/MrRobot-hub"
+            sudo rm -rf "$ETC_DIR/MrRobot-hub"
         else
             sudo rm -rf "$ETC_DIR/MrRobot-hub"
         fi
@@ -70,16 +70,16 @@ if [ "$mama" == '1' ]; then
     echo "";
     git clone --depth=1 https://github.com/MrRobot-hub/androwind "$INSTALL_DIR";
     echo "#!$BASH_PATH
-    python $INSTALL_DIR/androwind.py" "${1+"$@"}" > "$INSTALL_DIR/androwind";
-    chmod +x "$INSTALL_DIR/androwind";
+    sudo python3 $INSTALL_DIR/androwind.py" "${1+"$@"}" > "$INSTALL_DIR/androwind";
+    sudo chmod +x "$INSTALL_DIR/androwind";
     if [ "$TERMUX" = true ]; then
-        cp "$INSTALL_DIR/androwind" "$BIN_DIR"
-        cp "$INSTALL_DIR/androwind.cfg" "$BIN_DIR"
+        sudo cp "$INSTALL_DIR/androwind" "$BIN_DIR"
+        sudo cp "$INSTALL_DIR/androwind.cfg" "$BIN_DIR"
     else
         sudo cp "$INSTALL_DIR/androwind" "$BIN_DIR"
         sudo cp "$INSTALL_DIR/androwind.cfg" "$BIN_DIR"
     fi
-    rm "$INSTALL_DIR/androwind";
+    sudo rm "$INSTALL_DIR/androwind";
 
 
     if [ -d "$INSTALL_DIR" ] ;
