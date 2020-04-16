@@ -35,7 +35,7 @@ if [ "$mama" == '1' ]; then
         BASH_PATH="/bin/bash"
         TERMUX=false
 
-        sudo apt update; sudo apt-get install -y git python3; sudo apt install python3-pip; sudo pip3 install netifaces
+        sudo apt update; sudo apt-get install -y git python3; sudo apt install python3-pip; sudo pip3 install netifaces; sudo bash apktool
     fi
 
     echo -e "\n[\e[32m✔\e[97m] Checking directories...";
