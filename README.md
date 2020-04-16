@@ -1,5 +1,5 @@
 # Androwind
-last Updated: Sun 05 Apr 2020 09:54:16 PM PKT
+last Updated: Thu 16 Apr 2020 08:33:10 AM PKT
 
 Click this thumbnail to watch the video about Androwind Installation and proper use!
 
