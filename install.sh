@@ -13,7 +13,7 @@ echo -e "\e[91m
 \e[97m"
 
 echo -e "[\e[32m1\e[97m]. Install Androwind \n[\e[32m2\e[97m]. Uninstall Androwind \n[\e[32m3\e[97m]. Update Androwind \n[\e[32m4\e[97m]. Exit";
-read -r mama
+read -r mama    
 if [ "$mama" == '1' ]; then
 
     if [ "$PREFIX" = "/data/data/com.termux/files/usr" ]; then
@@ -66,7 +66,7 @@ if [ "$mama" == '1' ]; then
         fi
     fi
 
-    echo -e "[\e[5m\e[32m✔\e[97m\e[25m] Installing ...";
+    echo -e "[\e[5m\e[32m...\e[97m\e[25m] Installing, Please wait";
     echo "";
     git clone --depth=1 https://github.com/MrRobot-hub/androwind "$INSTALL_DIR";
     echo "#!$BASH_PATH
