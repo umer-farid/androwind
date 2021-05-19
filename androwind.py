@@ -134,7 +134,7 @@ def systemHandler():
 #It will copy ngrok in /usr/local/bin to make an executeable
 def ngrok():
     if not os.path.isfile('/usr/local/bin/ngrok'):
-        os.system("sudo cp ngrok /usr/local/bin")
+        os.system("sudo cp $HOME/.androwind/ngrok /usr/local/bin")
     print(blue_plus + " Ngrok installed ")
 
 
