@@ -148,7 +148,7 @@ def ngConfig():
             os.system(f"sudo mkdir $HOME/.ngrok2")
 
         except Exception as ex:
-            print("Exception: %s " %str(ex))
+            #print("Exception: %s " %str(ex))
     else:
         os.system(f"sudo cp -f $HOME/.androwind/ngrok.yml $HOME/.ngrok2/")
     print(blue_plus + " Configurations done")
