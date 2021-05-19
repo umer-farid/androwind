@@ -145,11 +145,12 @@ def ngConfig():
     if not os.path.exists(path):
 
         try:
-            os.system(f"sudo mkdir $HOME/.ngrok2 && sudo cp -f $HOME/.androwind/ngrok.yml $HOME/.ngrok2/")
+            os.system(f"sudo mkdir $HOME/.ngrok2")
 
         except Exception as ex:
             print("Exception: %s " %str(ex))
-
+    else:
+        os.system(f"sudo cp -f $HOME/.androwind/ngrok.yml $HOME/.ngrok2/")
     print(blue_plus + " Configurations done")
     print(blue_plus + " All done! For WAN forward ports by typing a command: \033[93m sudo ngrok start --all \033[0m")
     print("")
