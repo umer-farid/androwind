@@ -46,7 +46,7 @@ if [ -d "$INSTALL_DIR" ]; then
 
      echo -e "[\e[32m✔\e[97m] Androwind removed from: $BIN_DIR!"
 
-    sudo rm -rf /root/.ngrok2/
+    sudo rm -rf $HOME/.ngrok2/
 
      echo -e "[\e[32m✔\e[97m] Ngrok configurations removed!"
 
